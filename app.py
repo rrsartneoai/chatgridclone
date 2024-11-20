@@ -1,8 +1,10 @@
 import streamlit as st
 import plotly.graph_objects as go
+from dotenv import load_dotenv
+import os
 
-# Placeholder for Gemini API interaction.  Replace with actual Gemini API calls once documentation is available.
-gemini_api_key = "......."
+load_dotenv()
+gemini_api_key = os.getenv("GEMINI_API_KEY")
 
 st.title("Smart Grid Chatbot")
 
