@@ -1,35 +1,32 @@
 import streamlit as st
-import folium
-from streamlit_folium import folium_static
-import pandas as pd
+import plotly.graph_objects as go
+
+# Placeholder for Gemini API interaction.  Replace with actual Gemini API calls once documentation is available.
+gemini_api_key = "......."
 
 st.title("Smart Grid Chatbot")
 
-# Placeholder for chatbot integration
-st.header("Chatbot")
 user_input = st.text_input("Ask a question about the smart grid:")
+
+def get_gemini_response(user_input, api_key):
+    # Replace this with actual Gemini API interaction
+    # This is a placeholder to demonstrate the basic structure
+    #  You'll need to replace this with the actual Gemini API calls
+    #  once the API and documentation are available.
+    return f"Gemini's response to '{user_input}'"
+
+
 if user_input:
-    response = chatbot.get_response(user_input)
-    st.write(response)
+    st.write(f"You asked: {user_input}")
+    try:
+        # Placeholder for Gemini API call.  Replace with actual API call.
+        response = get_gemini_response(user_input, gemini_api_key)
+        st.write(f"Gemini Response: {response}")
+        st.write("Visualization:")
 
-# Data Visualization
-st.header("Interactive Map")
-grid_data = pd.read_csv("data.csv", nrows=4)
-plant_data = pd.read_csv("data.csv", skiprows=5)
+        # Sample Plotly chart
+        fig = go.Figure(data=[go.Bar(y=[2, 4, 1, 3])])
+        st.plotly_chart(fig)
 
-m = folium.Map(location=[40, -100], zoom_start=4)
-
-for index, row in grid_data.iterrows():
-    folium.Marker(
-        location=[row["latitude"], row["longitude"]],
-        popup=row["name"],
-    ).add_to(m)
-
-for index, row in plant_data.iterrows():
-    folium.Marker(
-        location=[row["latitude"], row["longitude"]],
-        popup=row["name"],
-        icon=folium.Icon(color="red"),
-    ).add_to(m)
-
-folium_static(m)
+    except Exception as e:
+        st.error(f"Error: {e}")
